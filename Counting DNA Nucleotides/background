@@ -1,0 +1,15 @@
+from collections import defaultdict
+
+def main(dataset_name:str):
+    data_set = open(dataset_name, "r")
+    count_dict = count_nucleoutides("".join(data_set.readlines()))
+    output_string = f"{count_dict.get("A")} {count_dict.get("C")} {count_dict.get("G")} {count_dict.get("T")}"
+    print(output_string)
+    
+def count_nucleoutides(dna_string:str):
+    counting_dict = defaultdict(int)
+    for char in dna_string:
+        counting_dict[char] = counting_dict[char] + 1
+    
+    return counting_dict
+    pass
