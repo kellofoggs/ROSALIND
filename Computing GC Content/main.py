@@ -16,13 +16,17 @@ def main(dataset_name:str):
     with open(dataset_name, "r") as data_set:
         dna_string = data_set.read()
         
-        matches_list = re.split(">(.*)", dna_string)[1:]
-        id_to_sequence_list = dict(zip(matches_list[::2], matches_list[1::2]))
+        matches_list = re.split(">(.*)", dna_string)[1:] # Skip the blankspace match
+
+        sequence_label = matches_list[::2]
+        sequence_list = list(map(lambda sequence: sequence.replace("\n",""), matches_list[1::2]))
+        id_to_sequence_list = dict(zip(sequence_label, sequence_list))
+
 
         gc_rate_list = []
         largest_GC = None
         for key in id_to_sequence_list.keys():
-            string = id_to_sequence_list[key].replace("\n","")
+            string = id_to_sequence_list[key]
             # print(string)
             counter = Counter(string)
 
