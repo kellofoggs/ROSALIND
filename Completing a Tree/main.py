@@ -3,24 +3,10 @@ from collections import defaultdict
 # Clump in a phylogenetic tree is called a taxon (taxa plural)
 import sys
 from io import TextIOWrapper
-def main(num_nodes:int, graph_list:List):
-
-    # data_set = data_set.readline()
-    # num_nodes = data_set.readline()
-    # num_nodes: int = 10
-    
-
+def old_method(num_nodes:int, graph_list:List):
+    # First convert edge list to adjacency dict that is bidirectional 
     graph:Dict[str,Set] = dict()
-
-
-
-    # Define edges as a list of sets, each set is sorted by the minimum of 
-   
-
-    # define the edges as a list of sets
-
-
-    # First convert edge list to adjacency dict
+    
     edges = list(map(str.split, graph_list))
     for edge in edges:
         if graph.get(edge[0]) is None:
@@ -30,8 +16,8 @@ def main(num_nodes:int, graph_list:List):
             graph[edge[1]] = set()
         graph[edge[1]].add(edge[0])
 
-    # Walk through the graph defining all clusters
     
+    # Walk through the graph defining all clusters/connected groups
     visited = set()
     clusters = list()
     for node in list(graph.keys()):
@@ -74,9 +60,12 @@ def main(num_nodes:int, graph_list:List):
     min_edge = min_edge + isolated_nodes
     print(min_edge)
 
+def constant_time_method(num_nodes:int, graph_list:List):
+    return num_nodes -1 - len(graph_list)
 dataset_name = sys.argv[1]
 
 with open(dataset_name, "r") as data_set:
     num_nodes = int(data_set.readline())
     graph_list =data_set.readlines()
-    main(num_nodes, graph_list)
+    # old_method(num_nodes, graph_list)
+    print(constant_time_method(num_nodes, graph_list))
