@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<!-- saved from url=(0036)https://rosalind.info/problems/tree/ -->
+<html lang="en" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>ROSALIND | Completing a Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script type="text/javascript" async="" src="./ROSALIND _ Completing a Tree_files/ga.js.download"></script><script type="text/javascript">
+      (function() {
+          document.getElementsByTagName("html")[0].className += " loading loading-mathjax";
+      })();
+    </script>
+    
+    
+    
+    <!-- Le styles -->
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="./ROSALIND _ Completing a Tree_files/rosalind.pack.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./ROSALIND _ Completing a Tree_files/jquery-ui.css" type="text/css" media="all">
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="https://rosalind.info/static/ico/favicon.ico?v=1637535648">
+  <style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax:focus, body :focus .MathJax {display: inline-table}
+.MathJax.MathJax_FullWidth {text-align: center; display: table-cell!important; width: 10000em!important}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax_LineBox {display: table!important}
+.MathJax_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Main; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Main-bold; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Main-italic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Math-italic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Caligraphic; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size1; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size2; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size3; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf?V=2.7.1') format('opentype')}
+@font-face {font-family: MathJax_Size4; src: url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff?V=2.7.1') format('woff'), url('https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf?V=2.7.1') format('opentype')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+
+  <body data-new-gr-c-s-check-loaded="14.1239.0" data-gr-ext-installed=""><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+
+    <div class="navbar navbar-fixed-top hide-on-print">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="https://rosalind.info/"><img src="./ROSALIND _ Completing a Tree_files/logo.png"></a>
+
+          <div class="nav-collapse">
+            <ul class="nav">
+               
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="https://rosalind.info/problems/tree/#">
+                      About
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="https://rosalind.info/about/">Project</a></li>
+                      <li><a href="https://rosalind.info/faq/">FAQ</a></li>
+                      <li><a href="https://rosalind.info/courses/">Courses</a></li>
+                      <li><a href="https://rosalind.info/faculty/">Faculty</a></li>
+                  </ul>
+              </li>
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="https://rosalind.info/problems/tree/#">
+                      Problems
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="https://rosalind.info/problems/list-view/">List View</a></li>
+                      <li><a href="https://rosalind.info/problems/tree-view/">Tree View</a></li>
+                      <li><a href="https://rosalind.info/problems/topics/">Topics</a></li>
+                      
+                          <li><a href="https://rosalind.info/problems/locations/">Locations</a></li>
+                      
+                  </ul>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="https://rosalind.info/problems/tree/#">
+                    Statistics
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="https://rosalind.info/statistics/top/">Top 100</a></li>
+                    <li><a href="https://rosalind.info/statistics/countries/">Countries</a></li>
+                    <li><a href="https://rosalind.info/statistics/levels/">Levels</a></li>
+                    <li><a href="https://rosalind.info/badges/">Badges</a></li>
+                    <li><a href="https://rosalind.info/achievements/">Achievements</a></li>
+                </ul>    
+              </li>
+              
+              <li class=""><a href="https://rosalind.info/glossary/">Glossary</a></li>
+            </ul>
+            
+            <form class="navbar-search pull-left" action="https://rosalind.info/search/" method="GET" enctype="multipart/form-data">
+                
+                
+                <input type="text" class="search-query " name="q" id="id_q" placeholder="search" accesskey="f" tabindex="1">
+            </form>
+
+            <div class="social-buttons">
+                <a href="https://www.facebook.com/pages/Rosalind/430419800314316" id="facebook" target="_blank" title="Facebook Profile"></a>
+                <a href="https://twitter.com/ProjectRosalind" id="twitter" target="_blank" title="Follow us on Twitter"></a>
+            </div>
+
+            <ul class="nav pull-right">
+                
+                    
+                
+                    <li class="" id="menu_profile"><a href="https://rosalind.info/users/kojukwu/">kojukwu</a></li>
+                    <li class="divider-vertical"></li>
+                    <li><a href="https://rosalind.info/accounts/logout/">Log out</a></li>
+                
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="container main">
+        <noscript>
+            <div class="row-fluid">
+                <div class="alert alert-warning flash-message">
+                    It appears that your browser has JavaScript disabled. Rosalind requires your browser to be JavaScript enabled.
+                </div>
+            </div>
+        </noscript>
+        
+        
+        
+<h1>Completing a Tree
+    
+        <nobr><small class="hide-on-print">
+            
+                <a href="https://rosalind.info/problems/tree/recent/">solved by 4471</a>
+            
+        </small></nobr>
+    
+</h1>
+
+<div class="problem-properties">
+<p class="date">
+    
+        July 10, 2012, 5 p.m.
+    
+    by
+    
+        <a href="https://rosalind.info/about/">Rosalind Team</a>
+    
+</p>
+
+    <p class="topics"><strong>Topics</strong>:
+        
+            <a href="https://rosalind.info/problems/topics/graph-algorithms/">Graph Algorithms</a>, 
+        
+            <a href="https://rosalind.info/problems/topics/phylogeny/">Phylogeny</a>
+        
+    </p>
+
+</div>
+<ul class="problems-pager hide-on-print">
+    
+    
+    <li class="previous">
+        <a href="https://rosalind.info/problems/tran/" data-content="Solved by 5568 (correct ratio 89.0%).&lt;p class=&quot;topics&quot;&gt;&lt;strong&gt;Topics&lt;/strong&gt;: &lt;span class=&quot;topic&quot;&gt;Alignment&lt;/span&gt;&lt;/p&gt;" rel="popover" data-placement="right" data-trigger="hover" data-original-title="“Transitions and Transversions”">←</a>
+    </li>
+    
+    
+    
+    <li class="next">
+        <a href="https://rosalind.info/problems/cat/" data-content="Solved by 1599 (correct ratio 43.1%).&lt;p class=&quot;topics&quot;&gt;&lt;strong&gt;Topics&lt;/strong&gt;: &lt;span class=&quot;topic&quot;&gt;Combinatorics&lt;/span&gt;, &lt;span class=&quot;topic&quot;&gt;String Algorithms&lt;/span&gt;, &lt;span class=&quot;topic&quot;&gt;Dynamic Programming&lt;/span&gt;&lt;/p&gt;" rel="popover" data-placement="left" data-trigger="hover" data-original-title="“Catalan Numbers and RNA Secondary Structures”">→</a>
+    </li>
+    
+</ul>
+<div class="problem-statement problem-statement-bordered" problem="175">
+    <blockquote style="display: block;">
+<h2 id="the-tree-of-life" class="pointer">The Tree of Life<span class="header-expander">click to collapse</span></h2>
+<div style="display: block;"><div class="thumb"><a figure="Figure 1" href="https://rosalind.info/media/problems/tree/phylogenetic_tree.png" lightbox-title="A phylogeny illustrating proposed evolutionary relationships among the three domains of life: Bacteria, Archaea, and Eukaryota." rel="lightbox[figures]" data-original-title=""><img src="./ROSALIND _ Completing a Tree_files/phylogenetic_tree.thumb.png"></a><div class="caption"><strong>Figure 1</strong><span>. </span><span>A phylogeny illustrating proposed evolutionary relationships among the three domains of life: Bacteria, Archaea, and Eukaryota.</span></div>
+</div><p>"As buds give rise by growth to fresh buds, and these, if vigorous, branch out and
+overtop on all sides many a feebler branch, so by generation I believe it has been with
+the great Tree of Life, which fills with its dead and broken branches the crust of the
+earth, and covers the surface with its ever-branching and beautiful ramifications."  <strong>Charles Darwin</strong>, <strong><em>The Origin of Species</em></strong></p><p>A century and a half has passed since the publication of Darwin's magnum opus,
+and yet the construction of a single <a class="term new" href="https://rosalind.info/glossary/tree-of-life/" id="term-285" rel="tooltip" data-original-title="New term: The abstract notion that all life forms on Earth have branched out from a single common
+ancestor as a result of the differentiating power of evolution.">Tree of Life</a> uniting life on Earth
+still has not been completed, with perhaps as many as 90% of all living species not yet catalogued
+(although a beautiful interactive animation has been produced by <a href="http://www.onezoom.org/" target="_blank">OneZoom</a>).</p><p>To learn about state-of-the-art attempts to build the Tree of Life, you may like to check out the <a href="http://www.tolweb.org/" target="_blank">Tree of Life Web Project</a>, a
+collaborative effort by biologists from around the world. This peer-reviewed project started in 1995, and today it has grown to contain more than 10,000 pages with
+characteristics of different groups of organisms and their evolutionary history.</p><p>Instead of trying to construct the entire Tree of Life all at once,
+we often wish to form a simpler tree in which a collection of species
+have been clumped together for the sake of simplicity; such a group is called a <a class="term new" href="https://rosalind.info/glossary/taxon/" id="term-226" rel="tooltip" data-original-title="New term: 
+A collection of organisms formed into a unit for the purposes of phylogenetic analysis.">taxon</a> (pl. taxa).
+For a given collection of taxa,
+a <a class="term new" href="https://rosalind.info/glossary/phylogeny/" id="term-284" rel="tooltip" data-original-title="New term: 
+A tree modeling the evolutionary scenario deriving a collection of taxa from their proposed ancestors.">phylogeny</a> is a treelike diagram that best represents the evolutionary connections between the taxa:
+the construction of a particular phylogeny depends on our specific assumptions
+regarding how these evolutionary relationships should be interpreted. See <a href="https://rosalind.info/media/problems/tree/phylogenetic_tree.png" lightbox-title="A phylogeny illustrating proposed evolutionary relationships among the three domains of life: Bacteria, Archaea, and Eukaryota." rel="lightbox[figures]" data-original-title="Click to view">Figure 1</a>.</p></div>
+
+
+
+
+</blockquote>
+<h2 id="problem">Problem</h2>
+<div class="thumb"><a figure="Figure 2" href="./ROSALIND _ Completing a Tree_files/tree_graph.png" lightbox-title="A labeled tree with 6 vertices and 5 edges." rel="lightbox[figures]" data-original-title=""><img src="./ROSALIND _ Completing a Tree_files/tree_graph.png"></a><div class="caption"><strong>Figure 2</strong><span>. </span><span>A labeled tree with 6 vertices and 5 edges.</span></div>
+</div>
+<p>An undirected <a class="term" href="https://rosalind.info/glossary/graph/" id="term-365" rel="tooltip" data-original-title="
+A network containing a collection of nodes, pairs of which are joined by edges.">graph</a> is <a class="term new" href="https://rosalind.info/glossary/connected-graph/" id="term-283" rel="tooltip" data-original-title="New term: 
+A graph in which there exists a path between any two nodes.">connected</a> if there is a <a class="term" href="https://rosalind.info/glossary/path/" id="term-368" rel="tooltip" data-original-title="
+A collection of nodes and edges in which each node is connected to the next via an edge.">path</a> connecting any two <a class="term" href="https://rosalind.info/glossary/node/" id="term-228" rel="tooltip" data-original-title="
+A point forming the hubs of the network represented by a graph.">nodes</a>.
+A <a class="term new" href="https://rosalind.info/glossary/tree/" id="term-232" rel="tooltip" data-original-title="New term: 
+A connected graph containing no cycles.">tree</a> is a connected (undirected) graph containing no <a class="term" href="https://rosalind.info/glossary/cycle/" id="term-282" rel="tooltip" data-original-title="
+A path in a graph that begins and ends in the same node.">cycles</a>; this definition forces the tree
+to have a branching structure organized around a central core of nodes,
+just like its living counterpart. See <a href="./ROSALIND _ Completing a Tree_files/tree_graph.png" lightbox-title="A labeled tree with 6 vertices and 5 edges." rel="lightbox[figures]" data-original-title="Click to view">Figure 2</a>.</p>
+<p>We have already grown familiar with trees in <a data-content="Solved by 18700 (correct ratio 70.3%).&lt;p class=&quot;topics&quot;&gt;&lt;strong&gt;Topics&lt;/strong&gt;: &lt;span class=&quot;topic&quot;&gt;Heredity&lt;/span&gt;, &lt;span class=&quot;topic&quot;&gt;Probability&lt;/span&gt;&lt;/p&gt;" data-trigger="hover" href="https://rosalind.info/problems/iprb/" rel="popover" data-original-title="“Mendel&#39;s First Law”">“Mendel's First Law”</a>, where we introduced the <a class="term" href="https://rosalind.info/glossary/probability-tree-diagram/" id="term-646" rel="tooltip" data-original-title="
+A branching diagram representing all outcomes of multiple random variables.">probability tree diagram</a>
+to visualize the <a class="term" href="https://rosalind.info/glossary/outcome/" id="term-645" rel="tooltip" data-original-title="
+A possible value taken by a random variable.">outcomes</a> of a <a class="term" href="https://rosalind.info/glossary/random-variable/" id="term-647" rel="tooltip" data-original-title="
+A variable that can take different values based on a randomized process.">random variable</a>.</p>
+<p>In the creation of a phylogeny, taxa are encoded by the
+tree's <a class="term new" href="https://rosalind.info/glossary/leaf/" id="term-207" rel="tooltip" data-original-title="New term: 
+A node in a tree having degree equal to 1.">leaves</a>, or nodes having <a class="term" href="https://rosalind.info/glossary/degree/" id="term-229" rel="tooltip" data-original-title="
+The number of edges incident to a node.">degree</a> 1. A node of a tree having degree larger than 1 is called an <a class="term new" href="https://rosalind.info/glossary/internal-node/" id="term-212" rel="tooltip" data-original-title="New term: 
+A node of a tree having degree at least 2.">internal node</a>.</p>
+<p><span class="given-return">Given:</span> A positive integer <mathjax><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 0.708em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.58em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.542em, 1000.58em, 2.375em, -999.997em); top: -2.176em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.183em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.073em; border-left: 0px solid; width: 0px; height: 0.696em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-1">n</script></mathjax> (<mathjax><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2264;&lt;/mo&gt;&lt;mn&gt;1000&lt;/mn&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 4.747em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.913em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.349em, 1003.85em, 2.503em, -999.997em); top: -2.176em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">n</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main; padding-left: 0.26em;">≤</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.26em;">1000</span></span><span style="display: inline-block; width: 0px; height: 2.183em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.227em; border-left: 0px solid; width: 0px; height: 1.158em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>≤</mo><mn>1000</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">n \leq 1000</script></mathjax>) and an <a class="term" href="https://rosalind.info/glossary/adjacency-list/" id="term-391" rel="tooltip" data-original-title="
+A list containing the edges of a graph.">adjacency list</a> corresponding to a graph on <mathjax><span class="MathJax_Preview" style="color: inherit; display: none;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" style="position: relative;" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/math&gt;" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 0.708em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.58em; height: 0px; font-size: 120%;"><span style="position: absolute; clip: rect(1.542em, 1000.58em, 2.375em, -999.997em); top: -2.176em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mi" id="MathJax-Span-11" style="font-family: MathJax_Math-italic;">n</span></span><span style="display: inline-block; width: 0px; height: 2.183em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.073em; border-left: 0px solid; width: 0px; height: 0.696em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span></span><script type="math/tex" id="MathJax-Element-3">n</script></mathjax> nodes
+that contains no cycles.</p>
+<p><span class="given-return">Return:</span> The minimum number of <a class="term" href="https://rosalind.info/glossary/edge/" id="term-366" rel="tooltip" data-original-title="
+A segment or curve connecting two nodes in a graph.">edges</a> that can be added to the graph to produce a tree.</p>
+<h2 id="sample-dataset">Sample Dataset</h2>
+<div class="codehilite"><pre>10
+1 2
+2 8
+4 10
+5 9
+6 10
+7 9
+</pre></div>
+
+
+<h2 id="sample-output">Sample Output</h2>
+<div class="codehilite"><pre>3
+</pre></div>
+
+
+<blockquote style="display: block;">
+<h2 id="extra-information" class="pointer">Extra Information<span class="header-expander">click to expand</span></h2>
+<div style="display: none;"><p>After solving this problem, a standard mathematical exercise for the technically minded 
+is to verify that every tree having 2 or more nodes must contain at least two leaves.</p></div>
+</blockquote>
+<div class="clearfix"></div>
+</div>
+
+
+    <div class="row">
+        <div class="span7">
+            
+                <p class="problem-timelimit  hide-on-print"><span class="label label-info">Time limit</span> You'll have <span id="id_span_timelimit">5 minutes</span> to upload the answer.</p>
+                <p class="problem-timeleft hide hide-on-print" style="display: none;"><span class="label label-important">Time left</span> You have <span id="id_span_timeleft"></span> to upload the answer.</p>
+                <p class="problem-timewait hide hide-on-print" style="display: none;"><span class="label label-warning">Please wait</span> You may make another attempt in <span id="id_span_timewait"></span>.</p>
+            
+
+            
+
+            
+                <div class="problem-dataset  hide-on-print">
+                    <p>
+                        <a id="id_problem_dataset_link" class="btn btn-primary btn-large" rel="nofollow" href="https://rosalind.info/problems/tree/dataset/">
+                          Download dataset
+                        </a>
+                        You may make an unlimited number of attempts without being penalized.
+                    </p>
+                </div>
+                <div class="problem-dataset-again hide hide-on-print" style="display: none;">
+                    <p>
+                        <a class="btn btn-large" rel="nofollow" href="https://rosalind.info/problems/tree/dataset/">
+                          Download current dataset again
+                        </a>
+                    </p>
+                </div>
+            
+        </div>
+        <div class="span5 problem-comments hide-on-print">
+            
+            
+        </div>
+    </div>
+
+    
+
+    
+        <div class="problem-submission hide hide-on-print" style="display: none;">
+            <h2>Answer submission <small id="id_countdown"></small></h2>
+            <form id="id_form_submission" class="well" action="https://rosalind.info/problems/tree/" method="POST" enctype="multipart/form-data">
+            <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="YJZamkNRcpHVOFiWZHRZhwRGsiRlfJmH"></div>
+            
+
+<fieldset>
+
+  
+      
+<div class="control-group ">
+    
+        <label class="control-label" for="id_output_text">Copy your answer here:</label>
+        <div class="controls">
+            <textarea id="id_output_text" rows="10" cols="40" name="output_text"></textarea>
+            
+        </div>
+    
+    
+</div>
+  
+      
+<div class="control-group ">
+    
+        <label class="control-label" for="id_output_file">Or just attach a file with the answer:</label>
+        <div class="controls">
+            <input type="file" name="output_file" id="id_output_file">
+            
+        </div>
+    
+    
+</div>
+  
+      
+<div class="control-group ">
+    
+        <label class="control-label" for="id_code">Your code (optional):</label>
+        <div class="controls">
+            <input type="file" name="code" id="id_code">
+            
+        </div>
+    
+    
+</div>
+  
+  
+  
+  
+  
+      <div class="">
+        <button type="submit" class="btn btn-primary btn-large">Submit</button>
+        
+      </div>
+  
+  
+</fieldset>
+            </form>
+        </div>
+    
+
+    <div class="modal hide" id="id_submission_timeout">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">×</button>
+            <h3>Time Limit</h3>
+        </div>
+        <div class="modal-body">
+            <p>Try again faster.</p>
+        </div>
+        <div class="modal-footer">
+            <a href="https://rosalind.info/problems/tree/#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+
+
+
+
+        <div class="footer hide-on-print">
+            <ul>
+                <li><span rel="tooltip" data-original-title="Select a typo with your mouse and press Ctrl+Enter">Found a typo?</span></li>
+                <li><a class="take-tour" href="https://rosalind.info/problems/list-view/">Take a tour</a></li>
+            </ul>
+        </div>
+    </div> <!-- /container -->
+    
+    
+    <div class="modal hide" id="id_report_typo">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Report a typo</h3>
+    </div>
+    
+    <div class="modal-body">
+        <p>Page:<br><span id="id_report_typo_page"></span></p>
+        <p>Context:<br><span id="id_report_typo_context"></span></p>
+        <form id="id_report_typo_form" action="https://rosalind.info/typos/report/" method="POST" autocomplete="off">
+            
+
+    <input type="hidden" name="context" id="id_context">
+
+<fieldset>
+
+  
+      
+<div class="control-group ">
+    
+        <label class="control-label" for="id_comment">Comment:</label>
+        <div class="controls">
+            <textarea id="id_comment" rows="10" cols="40" name="comment"></textarea>
+            
+        </div>
+    
+    
+</div>
+  
+      
+<div class="control-group ">
+    
+        <div class="controls">
+            <label class="checkbox" for="id_is_notify_user">
+                <input checked="checked" type="checkbox" name="is_notify_user" id="id_is_notify_user"> <span>Notify me about changes</span>
+            </label>
+            
+        </div>
+    
+    
+</div>
+  
+  
+  
+  
+  
+  
+</fieldset>
+        </form>
+    </div>
+    
+    <div class="modal-footer">
+        <a href="https://rosalind.info/problems/tree/#" class="btn btn-primary" id="id_report_typo_submit">Report</a>
+        <a href="https://rosalind.info/problems/tree/#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+</div>
+
+    <div class="modal hide" id="id_modal">
+        <div class="modal-header">
+            <button class="close" data-dismiss="modal">×</button>
+            <h3></h3>
+        </div>
+        <div class="modal-body">
+            <p></p>
+        </div>
+        <div class="modal-footer">
+            <a href="https://rosalind.info/problems/tree/#" class="btn" data-dismiss="modal">Close</a>
+        </div>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    <script type="text/javascript" src="./ROSALIND _ Completing a Tree_files/jquery.min.js.download"></script>
+    <script type="text/javascript" src="./ROSALIND _ Completing a Tree_files/jquery-ui.min.js.download"></script>
+    <script type="text/javascript" charset="utf-8">
+        var RosalindSettings = {"is_authenticated": true, "is_solver": true, "urls": {"log_block_collapse": "/problems/log/block/collapse/", "log_block_expand": "/problems/log/block/expand/", "glossary_index": "/glossary/", "log_wikipedia": "/glossary/log/wikipedia/", "log_figure": "/problems/log/figure/"}};
+    </script>
+    <script type="text/javascript" src="./ROSALIND _ Completing a Tree_files/rosalind.pack.min.js.download"></script>
+    <script type="text/javascript" charset="utf-8">
+        
+            
+                action_queue.add_action(new Action({"action": "problem-view", "options": {"timelimit": 300, "state": 1, "timeleft": 300, "timewait": 0}}));
+            
+        
+    </script>
+    
+    
+    
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$']]}, TeX: {extensions: ["mhchem.js", "color.js"]}});
+    </script>
+    <script type="text/javascript" src="./ROSALIND _ Completing a Tree_files/MathJax.js.download">
+    </script>
+    
+    
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-32242996-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    <!-- Google Analytics -->
+    
+
+  
+
+<div id="lightboxOverlay" style="display: none;"></div><div id="lightbox" style="display: none;"><div class="lb-outerContainer"><div class="lb-container"><img class="lb-image"><div class="lb-nav"><a class="lb-prev"></a><a class="lb-next"></a></div><div class="lb-loader"><a class="lb-cancel"><img src="./ROSALIND _ Completing a Tree_files/loading.gif"></a></div></div></div><div class="lb-dataContainer"><div class="lb-data"><div class="lb-details"><span class="lb-caption"></span><span class="lb-number"></span></div><div class="lb-closeContainer"><a class="lb-close"><img src="./ROSALIND _ Completing a Tree_files/close.png"></a></div></div></div></div><div id="glossaryWindow" class="modal hide"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3 id="glossaryHeader"></h3></div><div id="glossaryLoader" class="modal-body" style="display: none;"><i class="icon-spinner icon-spin"></i></div><div id="glossaryBody" class="modal-body" style="display: none;"></div><div class="modal-footer"><a id="glossaryWikipediaLink" href="https://rosalind.info/problems/tree/#" class="btn btn-info hide" target="_blank">Wikipedia</a><a href="https://rosalind.info/problems/tree/#" class="btn" data-dismiss="modal">Close</a></div></div><div id="flagWindow" class="modal hide"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3 id="flagHeader">Flag as inappropriate</h3></div><div id="flagBody" class="modal-body">Are you sure you want to flag this comment as inappropriate?</div><div class="modal-footer"><a id="flagLink" href="https://rosalind.info/problems/tree/#" class="btn btn-warning">Yes, flag it</a><a href="https://rosalind.info/problems/tree/#" class="btn" data-dismiss="modal">Cancel</a></div></div><div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: MathJax_Main, sans-serif;"></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
