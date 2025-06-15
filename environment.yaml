@@ -1,0 +1,13 @@
+# This environment assumes that you're using windows for the first python path
+# For the commented out python path we assume you're using linux as the file path notation differs
+
+name: rosalind_env
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+variables:
+  PYTHONPATH: <PATH_TO_ROSALIND_DIR>
+
+  # PYTHONPATH: <PATH_TO_ROSALIND_DIR>;
+
