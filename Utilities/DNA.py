@@ -1,4 +1,7 @@
-from typing import Dict, Set, List
+from typing import Dict, Set, List, Tuple
+from decimal import Decimal
+from collections import defaultdict, Counter
+
 class StringTools:
 
 
@@ -66,3 +69,50 @@ TGG W      CGG R      AGG R      GGG G
         return dna_strand.replace("T", "U")
 
 
+class ProbabilityTools:
+
+    @staticmethod
+    def caclulate_dna_probability(gc_content:float, dna_string:str):
+        '''Calculate the probability of the dna string occuring given GC content'''
+        
+        counter = Counter(dna_string)
+
+        
+
+        prob_dict = ProbabilityTools.calculate_nuc_probs_from_GC(gc_content)
+        out_prob = 1
+        A = counter["A"]
+        T = counter["T"]
+        G = counter["G"]
+        C = counter["C"]
+        return (prob_dict.get("A")**(A+T)) * (prob_dict.get("G")**(C+G))
+        # for char in dna_string:
+        #     prob = prob_dict.get(char)
+        #     if prob is None and type(prob) not in {float,Decimal}:
+        #         raise IOError("The dna string contains non-dna characters")
+        #     else: # I know the else isn't necessary it's for readability
+        #         out_prob = out_prob * prob
+
+        return out_prob
+        pass
+
+    @staticmethod
+    def calculate_nuc_probs_from_GC(gc_content:float) -> Dict[str, float]:
+        '''
+        Calculate the probability of each nucleotide occuring based on the GC content.
+        @param: gc_content: percentage/float that represents the amount of the string that is either guanine or cytosine
+        @return: A dictionary where 
+             Each key is the letter that represents the nucleotide in {A,T,G,C} 
+             Each value is the float that represents the probability of the nucleotide occuring
+        '''
+
+        prob_guanine = prob_cytosine = gc_content/2
+        prob_adenine = prob_thymine = (1-gc_content)/2
+        return {
+            "A": prob_adenine,
+            "T": prob_thymine,
+            "G": prob_guanine,
+            "C": prob_cytosine
+
+        }
+        
