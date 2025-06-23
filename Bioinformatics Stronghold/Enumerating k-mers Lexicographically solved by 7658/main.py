@@ -1,12 +1,9 @@
 from typing import List
 import sys
 from Utilities.InputFileTools import GenericTextFile
-alphabet_string = "A C G T"
-k_mer_len = 2
-alphabet_list = alphabet_string.split()
 
 
-# First things first we make all the possible strings of length 1
+
 
 def make_lexographic_strings(alphabet_string:str, string_length=2):
     k_mer_len = 2
@@ -21,9 +18,6 @@ def make_lexographic_strings(alphabet_string:str, string_length=2):
         print(word)
 
     pass
-
-# def make_layer(alpha_bet_list):
-
 
 
 def make_string_recur(prev_layer:List,base_layer:List, count=0, current_layer=0):
@@ -48,5 +42,5 @@ def make_string_recur(prev_layer:List,base_layer:List, count=0, current_layer=0)
 def main(alphabet_string:str, string_length:int):
     make_lexographic_strings(alphabet_string, string_length)
 
-file_lines = GenericTextFile.get_generic_file_as_lines(fasta_file=sys.argv[1])
+file_lines = GenericTextFile.get_generic_file_as_lines(file=sys.argv[1])
 main(alphabet_string=file_lines[0], string_length=int(file_lines[1]))

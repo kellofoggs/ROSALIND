@@ -49,7 +49,7 @@ class GenericTextFile:
     Used to convert fasta file into different formats, pass in the file path or file handle
     '''
     @staticmethod
-    def get_generic_file_as_lines(file: Union[str, TextIOWrapper]) -> List:
+    def get_generic_file_as_lines(file: Union[str, TextIOWrapper]) -> List[str]:
         if type(file) == str:
             with open(file) as text_file:
                 return text_file.read().splitlines()

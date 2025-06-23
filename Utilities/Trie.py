@@ -79,7 +79,6 @@ class Trie:
         
         to_visit_stack = [self.root_node] 
         visited = set()
-        # to_visit_stack.append()
 
 
 
@@ -95,34 +94,6 @@ class Trie:
                     edge_label = child.content
                     print(f"{parent_num} {child_node_num} {edge_label}")
                     to_visit_stack.append(child)
-                # to_visit_stack.extend(list(current.children))
-
-
-            
-            
-
-
-
-
-
-
-        
-        pass
-
-    def dfs_wrapper(self, query_string):
-        '''
-        @param: query_string: The string that you're searching for in the trie
-        @return: Return what part of the string was found in the tree (i.e.) the path taken to it
-        '''
-        # See how far u 
-
-    def breadth_first_search(self, query_string):
-        # For constructing a trie it's probably best to use bfs
-        query_arr = list(query_string)
-        discovered = set() # A discovered set is not needed as we know that the graph is a tree (no cycles possible)
-        start_vertex  = self.root_node #query_arr.pop(0) 
-        to_visit = start_vertex.children
-        
 
 
 
