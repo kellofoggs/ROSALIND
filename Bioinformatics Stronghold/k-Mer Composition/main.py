@@ -20,7 +20,7 @@ def count_overlapping_enums(text: str, enum_list: list[str]) -> dict[str, int]:
 file_path = sys.argv[1]
 fasta_string = Fasta.get_fasta_as_list(file_path)[0]
 
-def main( fasta_string):
+def main(fasta_string):
     ordered_alphabet = ["A","C","G","T"]
     enum_len = 4
     lex_enums = Enumerations.fast_lex_words(ordered_alphabet, enum_len)

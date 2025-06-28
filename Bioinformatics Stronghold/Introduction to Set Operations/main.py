@@ -54,7 +54,7 @@ def main(universal_set_size, set_one_string, set_two_string ):
     print(set_complement(source_set=set_two, universal_set=universal_set))
 
 input_file_path = sys.argv[1]
-inputs = GenericTextFile.get_generic_file_as_lines(fasta_file= input_file_path) # First line is u set size, second line is set string for a, 3rd line is set string for b
+inputs = GenericTextFile.get_generic_file_as_lines(file= input_file_path) # First line is u set size, second line is set string for a, 3rd line is set string for b
 main(int(inputs[0]), inputs[1], inputs[2]) 
 
 
