@@ -17,17 +17,7 @@ def main(data_set:TextIOWrapper):
         sequence_file_contents = data_set.read()
 
         overlap_bound = 3
-#         sequence_file_contents = '''>Rosalind_0498
-# AAATAAA
-# >Rosalind_2391
-# AAATTTT
-# >Rosalind_2323
-# TTTTCCC
-# >Rosalind_0442
-# AAATCCC
-# >Rosalind_5013
-# GGGTGGG
-# '''
+
         
         matches_list = re.split(">(.*)", sequence_file_contents)[1:] # Skip the blankspace match
 
