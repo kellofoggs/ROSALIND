@@ -68,6 +68,9 @@ TGG W      CGG R      AGG R      GGG G
         '''
         return dna_strand.replace("T", "U")
 
+    @staticmethod
+    def count_nucleoutides(dna_string:str):
+        return Counter(dna_string)
 
 class ProbabilityTools:
 
@@ -75,16 +78,16 @@ class ProbabilityTools:
     def caclulate_dna_probability(gc_content:float, dna_string:str):
         '''Calculate the probability of the dna string occuring given GC content'''
         
-        counter = Counter(dna_string)
+        nuc_counts = StringTools.count_nucleoutides(dna_string)
 
         
 
         prob_dict = ProbabilityTools.calculate_nuc_probs_from_GC(gc_content)
         out_prob = 1
-        A = counter["A"]
-        T = counter["T"]
-        G = counter["G"]
-        C = counter["C"]
+        A = nuc_counts["A"]
+        T = nuc_counts["T"]
+        G = nuc_counts["G"]
+        C = nuc_counts["C"]
         return (prob_dict.get("A")**(A+T)) * (prob_dict.get("G")**(C+G))
         # for char in dna_string:
         #     prob = prob_dict.get(char)

@@ -58,4 +58,14 @@ class GenericTextFile:
             pass
         else:
             raise Exception("Either pass in the fast file as a string that is it's file path or a TextIOWrapper object")
-        
+    
+    @staticmethod 
+    def get_generic_file_as_str(file: Union[str, TextIOWrapper]) -> str:
+            if type(file) == str:
+                with open(file) as text_file:
+                    return text_file.read()
+            elif type(file) == TextIOWrapper:
+                return file.read()
+            else:
+                raise Exception("Either pass in the fast file as a string that is it's file path or a TextIOWrapper object")
+    

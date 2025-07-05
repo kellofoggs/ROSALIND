@@ -17,5 +17,9 @@ class Distributions:
         '''
         return comb(num_trials, num_success) * ((prob_succ)**num_success) * ((1-prob_succ)**(num_trials-num_success))
     @staticmethod
-    def binomial_cdf():
+    def binomial_cdf(num_trials: int, num_success:int, prob_success: float, or_equal_to:bool = True, greater_than:bool= True):
+
+
+
+        '''Return the probability that an event occurs less '''
         pass

@@ -103,8 +103,10 @@ class Trie:
     def add_node(self, parent_node:Node, child_node_name):
         child_node = Node(content=child_node_name)
         parent_node.add_children([child_node])
-    
-        
+
+class SuffixTrie(Trie):
+    def _
+    pass     
         
 
     
