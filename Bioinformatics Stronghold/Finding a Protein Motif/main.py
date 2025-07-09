@@ -20,7 +20,7 @@ def get_protein_text_file(protein_id:str) -> bytes:
     '''
 
     #  It seems like a lot of the old protein IDs have been changed.
-    #  Many species share proteins, so it makes ssense to not always included the species the protein came from in the ID
+    #  Many species share proteins, so it makes ssense to not always include the species the protein came from in the ID
     # This gets around that issue, the only problem is rechecking by firing a second network request is quite slow
     # In a perfect world where I was guaranteed the schema of ids have changed for all proteins I would simply split on the underscore
     # For every id instead of doing a retry

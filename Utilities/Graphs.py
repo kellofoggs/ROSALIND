@@ -1,6 +1,15 @@
-from typing import List, Dict, Set 
+from typing import List, Dict, Set, Union
+'''
+This file is used for the various types of graphs used throughout the Rosalind Project problems
+Has implementations for edge list graphs, adjacency list graphs etc.
+These graphs are helpful in overlap problems and used in Tries
+'''
 
-class Node: 
+
+class AdjacencyListNode: 
+    '''
+    Used for adjacency list graphs
+    '''
     children:Set # A set of nodes that are the children of the node
     content:str = None
     
@@ -34,12 +43,12 @@ class Trie:
     I personally think edge list is one of the worst ways to represent any sort of graph
 
        '''
-    root_node:Node = None
+    root_node:AdjacencyListNode = None
     node_order_dict:Dict = None # A dictionary where the key is the object, the value is the order of when it was added into the dict
 
     '''Make a Trie where each edge node other than the is a '''
     def __init__(self, input_strings):
-        self.root_node = Node(None)
+        self.root_node = AdjacencyListNode(None)
         self.node_order_dict = dict()
         self.node_order_dict[self.root_node] = 1
         self.create_trie_from_strings(input_strings)
@@ -54,7 +63,7 @@ class Trie:
         pass
         curr_node = self.root_node
         for char in string:
-            child_nodes:Set[Node] = curr_node.children
+            child_nodes:Set[AdjacencyListNode] = curr_node.children
             child_is_found = False
             for child in child_nodes:
                 # Search child nodes for 
@@ -64,7 +73,7 @@ class Trie:
                     break
             # If we don't find the expected node, then create it
             if not child_is_found:
-                new_child = Node(char)
+                new_child = AdjacencyListNode(char)
                 curr_node.add_children([new_child])
                 curr_node = new_child
                 self.node_order_dict[curr_node] = len(self.node_order_dict) + 1
@@ -84,7 +93,7 @@ class Trie:
 
         while len(to_visit_stack) > 0:
             
-            current:Node = to_visit_stack.pop()
+            current:AdjacencyListNode = to_visit_stack.pop()
             if current not in visited:
                 visited.add(current)
                 parent_num = self.node_order_dict[current]
@@ -100,13 +109,24 @@ class Trie:
     def add_node(self, path_to_start:str, ):
         pass
 
-    def add_node(self, parent_node:Node, child_node_name):
-        child_node = Node(content=child_node_name)
+    def add_node(self, parent_node:AdjacencyListNode, child_node_name):
+        child_node = AdjacencyListNode(content=child_node_name)
         parent_node.add_children([child_node])
 
-class SuffixTrie(Trie):
-    def _
-    pass     
+class OverlapGraph:
+
+    pass
+
+class Edge:
+    # Used for edge list graphs
+    source = None
+    target = None
+    weight: Union[float, int]
+
+
+# class SuffixTrie(Trie):
+#     def _
+#     pass     
         
 
     

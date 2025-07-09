@@ -1,6 +1,7 @@
 import sys
 import re
 import itertools
+from Utilities.InputFileTools import Fasta
 from math import factorial
 
 def main(sequence:str):
@@ -18,8 +19,8 @@ def main(sequence:str):
             pot_au_pairs = pot_au_pairs + 1
         elif char == "G":
             pot_gc_pairs = pot_gc_pairs + 1
-    print(pot_au_pairs)
-    print(pot_gc_pairs)
+    # print(pot_au_pairs)
+    # print(pot_gc_pairs)
     # There are pot_au_pairs! * pot_gc_pairs! ways to arrange these
     print(factorial(pot_au_pairs) * factorial(pot_gc_pairs))
     
@@ -27,14 +28,9 @@ def main(sequence:str):
 data_set_name = sys.argv[1]
 
 with open(data_set_name) as data_set:
-    dna_string = data_set.read()
-            
-    matches_list = re.split(">(.*)", dna_string)[1:] # Skip the blankspace match
 
-    sequence_label = matches_list[::2]
-    sequence_list = list(map(lambda sequence: sequence.replace("\n",""), matches_list[1::2]))
-    print(sequence_list)
-    main(sequence= sequence_list[0])
+    rna_sequence = Fasta.get_fasta_as_list(data_set)[0]
+    main(sequence= rna_sequence)
     pass
 
 

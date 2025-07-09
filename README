@@ -3,3 +3,7 @@ This section of Rosalind is dedicated to learning the algorithms used in bioninf
 Most of these problems can be solved in a naive/brute force way or using a more sophisticated strategy.
 Because many datasets used in bioinformatics are so large it's often crucial to solve these problems in 
 lower average/worst case time as the asymptotic time in asymptotic complexity will actually be approached
+
+
+My account for the rosalind site can be found at the following link:
+https://rosalind.info/users/kojukwu/

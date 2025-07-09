@@ -5,38 +5,26 @@ from collections import defaultdict, Counter
 import math
 from io import TextIOWrapper
 import textwrap
+from Utilities.InputFileTools import Fasta
 
-# Perfect place for linkedlist, we're only going to push and pop
 
-'''
-Note:
-    This is rather slow, we have to loop over all of the elements in the adult rabbit list to sum them to 
-    determine the number of offspring.
-'''
 def main(data_set:TextIOWrapper):
-        sequence_file_contents = data_set.read()
-
         overlap_bound = 3
 
-        
-        matches_list = re.split(">(.*)", sequence_file_contents)[1:] # Skip the blankspace match
+        sequence_map = Fasta.get_fasta_as_dict(data_set)
 
-        sequence_labels = matches_list[::2]
-        sequence_list = list(map(lambda sequence: sequence.replace("\n",""), matches_list[1::2]))
-        id_to_sequence_list = dict(zip(sequence_labels, sequence_list)) # This is a 
-        # print(id_to_sequence_list)
-        adjacencyy_set = set()
-
-        for i_id in sequence_labels:
-                i_sequence = id_to_sequence_list[i_id]
-                for j_id in sequence_labels:
-                        j_sequence = id_to_sequence_list[j_id]
+        adjacency_set = set()
+        print(sequence_map)
+        for i_id in sequence_map.keys():
+                i_sequence = sequence_map[i_id]
+                for j_id in sequence_map.keys():
+                        j_sequence = sequence_map[j_id]
                         if i_id != j_id and i_sequence[len(i_sequence) - overlap_bound:] == j_sequence[:overlap_bound] :
-                                adjacencyy_set.add((f"{i_id} {j_id}"))
+                                adjacency_set.add((f"{i_id} {j_id}"))
 
                         pass
     
-        for item in adjacencyy_set:
+        for item in adjacency_set:
                 print(item)
 
 
