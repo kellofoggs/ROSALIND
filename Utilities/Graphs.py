@@ -1,4 +1,6 @@
-from typing import List, Dict, Set, Union
+from typing import List, Dict, Set, Union, Tuple
+from collections import defaultdict
+import itertools
 '''
 This file is used for the various types of graphs used throughout the Rosalind Project problems
 Has implementations for edge list graphs, adjacency list graphs etc.
@@ -24,6 +26,11 @@ class AdjacencyListNode:
             self.children.add(child)
 
     
+class Edge:
+    # Used for edge list graphs
+    source = None
+    target = None
+    weight: Union[float, int]
 
 
         
@@ -114,14 +121,52 @@ class Trie:
         parent_node.add_children([child_node])
 
 class OverlapGraph:
+    '''General Overlap graph, creates edges where source is prefix, target is suffix string and the weight is the maximum overlap between
+        Two strings
+    '''
+    edges: List[Edge]
+    overlap_length:int = None
+    adjacency_map: Dict[str,List[Tuple]]
+    # It's better to use a weighted adjacency map here because of constant time hashing
+    def __init__(self, word_list:List[str], overlap_length=None):
+        self.adjacency_map = defaultdict(list)
+        self.overlap_length = overlap_length
+        self.construct_overlap_graph(word_list)
+        pass
 
+    def construct_overlap_graph(self, word_list:List[str]):
+
+        # Get all the combinations of words that are not the identity combination i.e. no (AAA, AAA)
+        # The first item in the nth tuple is the string whose suffix may match the second tuple elements prefix
+        word_combinations = [p for p in itertools.product(word_list, repeat=2) if p[0] != p[1]]
+
+        if self.overlap_length is None:
+            '''Construct graph where edges are for max overlap'''
+            pass
+        elif self.overlap_length > 0:
+            # Construct graph where edges are only for overlap of specific length
+            pass
+        else:
+            raise IOError("The overlap length must be either none or greater than 0")
+    
+    def add_edge(self, source, target, weight):
+        edge_tuple = (target, weight)
+        self.adjacency_map.get(source).append(edge_tuple)
+
+    
+    # def construct_labeled_overlap_graph(sequence_map:Dict[str, str]):
+    #     '''Used specifically for DNA sequences, construct an overlap graph where the name of the sequence'''
+        # pass
+
+    def strings_do_overlap_by_k(prefix:str, suffix:str, overlap:int):
+        prefix_len = len(prefix)
+        suffix_len = len(suffix)
+        return prefix[prefix_len - overlap:] == suffix[:overlap]
+        
+
+class FixedOverlapGraph:
     pass
 
-class Edge:
-    # Used for edge list graphs
-    source = None
-    target = None
-    weight: Union[float, int]
 
 
 # class SuffixTrie(Trie):

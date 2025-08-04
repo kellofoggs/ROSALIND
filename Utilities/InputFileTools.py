@@ -49,9 +49,10 @@ class GenericTextFile:
     Used to convert fasta file into different formats, pass in the file path or file handle
     '''
     @staticmethod
-    def get_generic_file_as_lines(file: Union[str, TextIOWrapper]) -> List[str]:
+    def get_generic_file_as_lines(file: Union[str, TextIOWrapper], is_binary_file:bool=False) -> List[Union[str, bytes]]:
+        perm_flag = 'rb' if is_binary_file else 'r'
         if type(file) == str:
-            with open(file) as text_file:
+            with open(file, perm_flag) as text_file:
                 return text_file.read().splitlines()
         elif type(file) == TextIOWrapper:
             return file.read().splitlines()
@@ -60,9 +61,11 @@ class GenericTextFile:
             raise Exception("Either pass in the fast file as a string that is it's file path or a TextIOWrapper object")
     
     @staticmethod 
-    def get_generic_file_as_str(file: Union[str, TextIOWrapper]) -> str:
+    def get_generic_file_as_str(file: Union[str, TextIOWrapper], is_binary_file:bool=False) -> Union[str, bytes]:
+            perm_flag = 'rb' if is_binary_file else 'r'
+
             if type(file) == str:
-                with open(file) as text_file:
+                with open(file, perm_flag) as text_file:
                     return text_file.read()
             elif type(file) == TextIOWrapper:
                 return file.read()
