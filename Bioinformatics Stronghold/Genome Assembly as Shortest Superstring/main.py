@@ -1,12 +1,49 @@
+'''
+
+This problem is considered to be an example of the traveling salesman problem.
+It is NP-hard, and there is no known guaranteed polynomial time solution without constraints.
+However thankfully we are given a dataset that satisfies the following condition:
+There exists a unique way to reconstruct the entire chromosome from these reads by 
+gluing together pairs of reads that overlap by more than half their length.
+
+There is a D-P algorithm that can be used to solve this problem in O(n^2 2^n) time where n is the number of input strings
+but it is not implemented here. This is known as the Held-Karp algorithm.
+
+There is a very clear problem with treating the shortest superstring problem as a valid way of DNA assembly.
+If there are duplicate strings in a DNA reading, the shortest superstring may not be the correct assembly. Who is to say that the duplicate reading
+is caused by a sequencing error or that it is a valid reading of the DNA? If it's a valid reading of the DNA then the shortest superstring will not be the correct assembly as
+it will be merged with other duplicate strings.
+
+My solution is what is known as a mickey mouse solution. It only works for the dataset provided, and does not guarantee a correct assembly
+without the constraints specified by Rosalind. However it runs in a reasonable time complexity.
+creating a lps array takes O(n+m) time where n is the length of the first string and m is the length of the second string.
+We do this for every pair of strings in the worst-case, so the time complexity is O(k^2 * (n+m)) where k is the number of input strings and m is the average length of the strings.
+
+
+Reference material for shortest superstring:
+    https://math.mit.edu/~goemans/18434S06/superstring-lele.pdf
+    https://www.youtube.com/watch?v=QykgNu0vdos
+    https://www.youtube.com/watch?v=BHUgDbVC4js
+'''
+
+
 from typing import List
 
 import re
+from Utilities.Graphs import Trie, DNAOverlapGraph
+from Utilities.Search import KMP
+from Utilities.InputFileTools import Fasta
+import sys
 
 
+def combine_strings(string_one:str, string_two:str, overlap_threshold:int=None) -> str:
+    ''' The dataset is guaranteed to satisfy the following condition: there exists a unique way to 
+    reconstruct the entire chromosome from these reads by gluing together pairs of reads that overlap by
+     more than half their length.
 
-def combine_strings(string_one:str, string_two:str):
-    # max over lap is half of the string. This is the first half in string two. The second half in string one
-    
+     This means that if over half of the second string is in the first we string we combine them and are guaranteed to get the correct combination
+    '''
+
     """
     What we want to do is look at the second half of the first string and see where 
     it has the same ordered chars as the first half of the second string
@@ -16,99 +53,96 @@ def combine_strings(string_one:str, string_two:str):
     s_one_len = len(string_one)
 
     s_two_len = len(string_two)
-    s_two_counter = 0 # s_two_counter is the index of the first non substring part of the second string 
-    s_one_window = string_one
-    s_two_window = string_two[:s_two_len//2]
-    
-    while s_two_counter < s_two_len:
+    if overlap_threshold is None:
+        overlap_threshold = min(s_one_len//2, s_two_len//2)
 
-        if s_one_window.endswith(s_two_window):
-            # print(s_two_counter)
-            print(s_two_window)
-            s_one_offset = 1+ (len(s_one_window) - len(s_two_window))
-            new_string = string_one[:s_one_offset] + string_two[s_two_counter:]
-            # print(string_one)
-            # print(string_two)
-            print(new_string)
-            return new_string 
-            
-            break
-        else:
-            s_two_window = s_two_window[:-1]
-        s_two_counter  = s_two_counter + 1
 
-    
-    
-    
-  
-    return None
+    # What we want to do is see how much of the suffix of the first string overlaps with the prefix of the second string
+    # If the overlap is past our overlap threshold, we can combine the two strings
+    # Else we will return None
+
+    num_overlap_chars = find_max_overlaps(string_one, string_two)
+    # print(num_overlap_chars)
+    if num_overlap_chars > overlap_threshold:
+        output = string_one + string_two[num_overlap_chars:]
+        return output
+    else:
+        return None
+
+def find_max_overlaps(prefix_string, suffix_strings:str) -> int:
+    ''' Take in a prefix string, and list of suffix strings
+        Return the maximum overlap between the two strings 
+        
+    '''
+
+    # We will use the lps borrowed from the KMP algorithm to find the maximum overlap between the two strings
+    # If we construct a string that is the second string + <a_char_we_know_is_outside_the alphabet of the two strings)> + the first string
+    # We can use the lps array to find the maximum overlap between the two strings (as the lps array will tell us how many characters match between the
+    # prefix of the second string and the suffix of the first string)
+
+    combined_strings = suffix_strings + "#" + prefix_string
+    max_overlap = KMP.generate_lps(combined_strings)[-1]  # The last value in the lps array will tell us the maximum overlap between the two strings
+    return max_overlap
+
+
 strands = ["ATTAGACCTG",
 "CCTGCCGGAA",
 "AGACCTGCCG",
 "GCCGGAATAC"]
 
+# tree = Trie(strands)
+# tree.depth_first_print()
 
 
-def find_max_overlaps(prefix_string, suffix_strings:List[str]) -> List:
-    ''' Take in a prefix string, and list of suffix strings
-        Return the strings that have the most overlap between each prefix and suffix string
-        (Output list has the same length as the suffix_strings list)
-    '''
+def main(strands:List[str]):
+    strands_set = sorted(list(set(strands)), key= lambda x: len(x)) # Ensure we have no duplicate strands
+    combined_strings = ""
+    prev_i = -1
+    prev_j = -1
+    threshold = min((len(strands_set[0])+1)//2, (len(strands_set[1])+1)//2)
+    print(f"Threshold: {threshold}")
+    i, j = 0, 0
+
+    while len(strands_set) > 1:
 
 
-    pass
+        while i < len(strands_set):
+
+            while j < len(strands_set):
+
+                
+                if i != j:
+
+                    combined = combine_strings(strands_set[i], strands_set[j], overlap_threshold= threshold )
+
+                    if combined is not None:  
+                        strands_set.pop(max(i,j)) # Remove larger index first to avoid index errors
+
+                        strands_set.pop(min(j,i))
+                        strands_set.append(combined)
+                        
+                        i = 0  # Reset i and j to start from the beginning again
+                        j = 0  
+                        continue
+                j += 1
+            j = 0
+            i += 1
+
+        print(combined)
+        
 
 
 
+                
 
 
+        pass
+i = 0
+j = 0
 
 
+# main(strands)
+file_path = sys.argv[1]
+strands = Fasta.get_fasta_as_list(file_path)
 
-
-
-# head_strand = strands.pop(0) # Smallest possible strand, which is just 
-
-# while len(strands) > 0:
-#     next = strands.pop(0)
-#     head_strand = combine_strings(head_strand, next)
-#     # print(head_strand)
-
-# print(head_strand)
-# combine_strings(head_strand, strands[0])
-
-'''
-overlaps = []
-overlapping = []
-for i in range(len(strands)):
-    curr_read = strands[i]
-    for j in range(len(curr_read) // 2, len(curr_read)):
-        curr_suffix = curr_read[-(j + 1):]
-        for k in range(len(strands)):
-            curr_comp = strands[k]
-            for l in range(len(curr_comp) // 2, len(curr_comp)):
-                curr_prefix = curr_comp[:l]
-                if curr_suffix == curr_prefix:
-                    overlaps.append(k)
-                    overlapping.append([len(curr_suffix), i, k])
-
-s = set(overlaps)
-first_read = ''
-count = len(overlapping)
-for m in range(len(overlapping)):
-    suf_index = overlapping[m][1]
-    if suf_index not in s:           #find first read and initialise new str
-        first_read = suf_index
-        new_str = strands[overlapping[m][1]] + strands[overlapping[m][2]][
-            overlapping[m][0]:]
-        count -= 1
-        pref_index = overlapping[m][2]
-        while count > 0:                       #when the first read is found, add 
-            for n in range(len(overlapping)):  #the remaining in the correct order
-                if pref_index == overlapping[n][1]:
-                    new_str += strands[overlapping[n][2]][overlapping[n][0]:]
-                    pref_index = overlapping[n][2]
-                    count -= 1
-
-print(new_str)
-'''
+main(strands)
