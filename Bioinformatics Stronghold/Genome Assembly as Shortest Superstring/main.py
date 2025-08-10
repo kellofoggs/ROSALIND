@@ -91,9 +91,7 @@ def main(strands:List[str]):
         return
 
 
-    combined_strings = ""
-    prev_i = -1
-    prev_j = -1
+
     threshold = min((len(strands_set[0])+1)//2, (len(strands_set[1])+1)//2)
     print(f"Threshold: {threshold}")
     i, j = 0, 0
@@ -123,14 +121,6 @@ def main(strands:List[str]):
             i += 1
 
         print(combined)
-        
-
-
-
-                
-
-
-        pass
 
 
 file_path = sys.argv[1]
