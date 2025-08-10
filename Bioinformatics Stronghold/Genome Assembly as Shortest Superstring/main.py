@@ -29,12 +29,11 @@ Reference material for shortest superstring:
 
 from typing import List
 
-import re
-from Utilities.Graphs import Trie, DNAOverlapGraph
+
 from Utilities.Search import KMP
 from Utilities.InputFileTools import Fasta
 import sys
-
+from datetime import datetime as dt
 
 def combine_strings(string_one:str, string_two:str, overlap_threshold:int=None) -> str:
     ''' The dataset is guaranteed to satisfy the following condition: there exists a unique way to 
@@ -62,7 +61,7 @@ def combine_strings(string_one:str, string_two:str, overlap_threshold:int=None) 
     # Else we will return None
 
     num_overlap_chars = find_max_overlaps(string_one, string_two)
-    # print(num_overlap_chars)
+
     if num_overlap_chars > overlap_threshold:
         output = string_one + string_two[num_overlap_chars:]
         return output
@@ -85,24 +84,19 @@ def find_max_overlaps(prefix_string, suffix_strings:str) -> int:
     return max_overlap
 
 
-strands = ["ATTAGACCTG",
-"CCTGCCGGAA",
-"AGACCTGCCG",
-"GCCGGAATAC"]
-
-# tree = Trie(strands)
-# tree.depth_first_print()
-
-
 def main(strands:List[str]):
     strands_set = sorted(list(set(strands)), key= lambda x: len(x)) # Ensure we have no duplicate strands
+    if len(strands_set) == 1:
+        print(strands_set[0])
+        return
+
+
     combined_strings = ""
     prev_i = -1
     prev_j = -1
     threshold = min((len(strands_set[0])+1)//2, (len(strands_set[1])+1)//2)
     print(f"Threshold: {threshold}")
     i, j = 0, 0
-
     while len(strands_set) > 1:
 
 
@@ -137,12 +131,11 @@ def main(strands:List[str]):
 
 
         pass
-i = 0
-j = 0
 
 
-# main(strands)
 file_path = sys.argv[1]
 strands = Fasta.get_fasta_as_list(file_path)
+
+
 
 main(strands)
