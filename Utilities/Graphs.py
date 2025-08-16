@@ -7,6 +7,33 @@ Has implementations for edge list graphs, adjacency list graphs etc.
 These graphs are helpful in overlap problems and used in Tries
 '''
 
+class DebruijnGraph:
+    @staticmethod
+    def generate_de_bruijn_graph(k_plus_1_mer_list:List[str], is_adjacency_map:bool=False) -> List[Tuple[str, str]]:
+        '''
+        Function that generates a debruijn graph given a list of (k+1)-mers in two formats:
+            Adjacency map
+            Edge list
+        This is set by the optional parameter is_adjacency_map which is a boolean, by default it is set to return
+        an edge list. Set to true to return an adjacency map. 
+        '''
+        k = len(k_plus_1_mer_list[0]) -1 
+        
+        if not is_adjacency_map:
+
+            debruijn_edges:List[Tuple[str, str]] = []
+            for k_plus_1_mer in k_plus_1_mer_list:
+                edge_tuple = (k_plus_1_mer[:k], k_plus_1_mer[1:])
+                debruijn_edges.append(edge_tuple)
+            return(debruijn_edges)
+        
+        else:
+            adjacency_map = defaultdict(list)
+            for k_plus_1_mer in k_plus_1_mer_list:
+                adjacency_map[k_plus_1_mer[:k]].append( k_plus_1_mer[1:])
+            return adjacency_map
+
+
 
 class AdjacencyListNode: 
     '''
@@ -120,21 +147,22 @@ class Trie:
         child_node = AdjacencyListNode(content=child_node_name)
         parent_node.add_children([child_node])
 
-class OverlapGraph:
+class DNAOverlapGraph:
     '''General Overlap graph, creates edges where source is prefix, target is suffix string and the weight is the maximum overlap between
         Two strings
     '''
     edges: List[Edge]
     overlap_length:int = None
     adjacency_map: Dict[str,List[Tuple]]
+    
     # It's better to use a weighted adjacency map here because of constant time hashing
     def __init__(self, word_list:List[str], overlap_length=None):
         self.adjacency_map = defaultdict(list)
         self.overlap_length = overlap_length
-        self.construct_overlap_graph(word_list)
+        self._construct_overlap_graph(word_list)
         pass
 
-    def construct_overlap_graph(self, word_list:List[str]):
+    def _construct_overlap_graph(self, word_list:List[str]):
 
         # Get all the combinations of words that are not the identity combination i.e. no (AAA, AAA)
         # The first item in the nth tuple is the string whose suffix may match the second tuple elements prefix
@@ -164,7 +192,7 @@ class OverlapGraph:
         return prefix[prefix_len - overlap:] == suffix[:overlap]
         
 
-class FixedOverlapGraph:
+class Overlap:
     pass
 
 
