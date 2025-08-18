@@ -9,7 +9,7 @@ These graphs are helpful in overlap problems and used in Tries
 
 class DebruijnGraph:
     @staticmethod
-    def generate_de_bruijn_graph(k_plus_1_mer_list:List[str], is_adjacency_map:bool=False) -> List[Tuple[str, str]]:
+    def generate_de_bruijn_graph(k_plus_1_mer_list:List[str], is_adjacency_map:bool=False) -> Union[List[Tuple[str, str]], Dict[str,List[str]] ]:
         '''
         Function that generates a debruijn graph given a list of (k+1)-mers in two formats:
             Adjacency map
