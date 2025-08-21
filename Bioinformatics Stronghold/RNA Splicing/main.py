@@ -1,4 +1,4 @@
-from Utilities.DNA import StringTools
+from Utilities.DNA import DNAStringTools
 from Utilities.InputFileTools import Fasta
 import sys
 import re
@@ -9,7 +9,7 @@ def main(dna_string:str, exons:List):
     # exons_translation = dict([(exon, " ") for exon in exons])
     intron_pattern = f'({"|".join(exons)})'
     exon_string = re.sub( intron_pattern, "", dna_string)
-    print(StringTools.translate_dna_to_amino_acid(exon_string))
+    print(DNAStringTools.translate_dna_to_amino_acid(exon_string))
     # print(exons_translation)
     # dna_string.translate(str.maketrans(exons_translation))
 

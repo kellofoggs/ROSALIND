@@ -5,6 +5,7 @@ from collections import defaultdict, Counter
 import math
 from io import TextIOWrapper
 import textwrap
+from Utilities.ArgParser import get_common_parser
 
 def main(data_set:TextIOWrapper):
 
@@ -31,6 +32,28 @@ def protein_to_num_RNA_strings(protein_string:str):
       "R", "V", "V", "V", "V", "A", "A", "A", "A", "D", "D", "E", "E", "G", "G", "G", "G"]
     
     codon_to_amino_acid = dict(zip(codons, amino_acids))
+
+    print(codon_to_amino_acid)
+
+
+    c_a_table = '''UUU F      CUU L      AUU I      GUU V
+UUC F      CUC L      AUC I      GUC V
+UUA L      CUA L      AUA I      GUA V
+UUG L      CUG L      AUG M      GUG V
+UCU S      CCU P      ACU T      GCU A
+UCC S      CCC P      ACC T      GCC A
+UCA S      CCA P      ACA T      GCA A
+UCG S      CCG P      ACG T      GCG A
+UAU Y      CAU H      AAU N      GAU D
+UAC Y      CAC H      AAC N      GAC D
+UAA Stop   CAA Q      AAA K      GAA E
+UAG Stop   CAG Q      AAG K      GAG E
+UGU C      CGU R      AGU S      GGU G
+UGC C      CGC R      AGC S      GGC G
+UGA Stop   CGA R      AGA R      GGA G
+UGG W      CGG R      AGG R      GGG G 
+'''.split()
+    print(c_a_table)
     amino_acid_to_codon_count = defaultdict(int)
     # amino_acid_to_codon = defaultdict(set) # If you want to keep the specific codons as well, not required for this problem
 
@@ -55,8 +78,10 @@ def protein_to_num_RNA_strings(protein_string:str):
     
 
     pass
+parser = get_common_parser()
+args = parser.parse_args()
 
-dataset_name = sys.argv[1]
+dataset_name = args.file
 
 with open(dataset_name, "r") as data_set:
     main(data_set=data_set)

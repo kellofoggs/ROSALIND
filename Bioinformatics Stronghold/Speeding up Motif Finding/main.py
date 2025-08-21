@@ -1,4 +1,4 @@
-from Utilities.StringTools import KMP
+from Utilities.Search import KMP
 from Utilities.InputFileTools import Fasta
 import sys
 

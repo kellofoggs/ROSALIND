@@ -1,5 +1,5 @@
 from Utilities.InputFileTools import Fasta
-from Utilities.DNA import StringTools
+from Utilities.DNA import DNAStringTools
 import sys
 '''
 Notes:
@@ -18,7 +18,7 @@ dna_string = Fasta.get_fasta_as_list(sys.argv[1])[0]
 
 
 # print(StringTools.reverse_complement_dna(dna_string))
-reverse_complement = StringTools.reverse_complement_dna(dna_string)
+reverse_complement = DNAStringTools.reverse_complement_dna(dna_string)
 
 dna_string_len = len(dna_string)
 
@@ -28,7 +28,7 @@ min_window_size = 4
 
 def find_reverse_palindromes(dna):
     n = len(dna)
-    revcomp = StringTools.reverse_complement_dna(dna)
+    revcomp = DNAStringTools.reverse_complement_dna(dna)
     result = []
 
     for l in range(4, 13):

@@ -1,10 +1,10 @@
 from Utilities.InputFileTools import Fasta
 from collections import defaultdict
-from Utilities.DNA import StringTools
+from Utilities.DNA import DNAStringTools
 from typing import List, Tuple, Dict, Set
 import sys
 def get_reverse_comp_and_orig_dna_reads(dna_read_list:List[str]) -> List[str]:
-    extended_dna_reads_list = list(map(StringTools.reverse_complement_dna, dna_read_list))
+    extended_dna_reads_list = list(map(DNAStringTools.reverse_complement_dna, dna_read_list))
     extended_dna_reads_list.extend(dna_read_list)
     return extended_dna_reads_list
 
@@ -59,7 +59,7 @@ def main(dna_read_list:List[str]):
 
     for incorrect_read in incorrect_reads:
         for correct_read in correct_reads:
-            dna_diffs = StringTools.count_point_mutations(incorrect_read, correct_read)
+            dna_diffs = DNAStringTools.count_point_mutations(incorrect_read, correct_read)
             if dna_diffs == 1:
                 corrections.append((incorrect_read, correct_read))
     

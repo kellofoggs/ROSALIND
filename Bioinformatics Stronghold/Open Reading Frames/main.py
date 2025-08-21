@@ -1,19 +1,19 @@
 import sys
 import re
-from Utilities.DNA import StringTools
+from Utilities.DNA import DNAStringTools
 from Utilities.InputFileTools import Fasta
 
 
 forward_strand = "AGCCATGTAGCTAACTCAGGTTACATGGGGATGACCCCGCGACTTGGATTAGAGTCTCTTTTGGAATAAGCCTGAATGATCCGAGTAGCATCTCAG"
 
-reverse_complement = StringTools.reverse_complement_dna(forward_strand)
+reverse_complement = DNAStringTools.reverse_complement_dna(forward_strand)
 
 
 
 def get_open_reading_frames(dna_strand:str):
     dna_string_len = len(dna_strand)
-    start_codons = StringTools.start_codons
-    stop_codons = StringTools.stop_codons
+    start_codons = DNAStringTools.start_codons
+    stop_codons = DNAStringTools.stop_codons
     reading_frames = []
     start_codon_indices = set()
     stop_codon_indices = []
@@ -42,10 +42,10 @@ def get_open_reading_frames(dna_strand:str):
 def main(dna_string:str):
     forward_strand = dna_string
 
-    reverse_complement = StringTools.reverse_complement_dna(dna_string)
+    reverse_complement = DNAStringTools.reverse_complement_dna(dna_string)
     open_reading_frames = []
-    open_reading_frames.extend(map(StringTools.translate_dna_to_amino_acid, get_open_reading_frames(forward_strand)))
-    open_reading_frames.extend(map(StringTools.translate_dna_to_amino_acid, get_open_reading_frames(reverse_complement)))
+    open_reading_frames.extend(map(DNAStringTools.translate_dna_to_amino_acid, get_open_reading_frames(forward_strand)))
+    open_reading_frames.extend(map(DNAStringTools.translate_dna_to_amino_acid, get_open_reading_frames(reverse_complement)))
 
 
     for frame in set(open_reading_frames):

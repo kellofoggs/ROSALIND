@@ -1,5 +1,5 @@
 from Utilities.InputFileTools import GenericTextFile
-from Utilities.DNA import StringTools
+from Utilities.DNA import DNAStringTools
 from typing import List, Tuple
 from collections import defaultdict
 import sys
@@ -30,7 +30,7 @@ New stuff:
 
 def main(k_plus_1_mer_list: List[str]):
 
-    k_plus_1_mer_rev_comp_list = list(map(StringTools.reverse_complement_dna, k_plus_1_mer_list))
+    k_plus_1_mer_rev_comp_list = list(map(DNAStringTools.reverse_complement_dna, k_plus_1_mer_list))
     source_union_rev_comp_list = list(set(k_plus_1_mer_rev_comp_list).union(set(k_plus_1_mer_list)))
     debruijn_edge_list =  DebruijnGraph.generate_de_bruijn_graph(source_union_rev_comp_list)
 

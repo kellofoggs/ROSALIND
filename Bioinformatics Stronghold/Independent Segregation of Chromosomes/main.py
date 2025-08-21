@@ -23,7 +23,7 @@ def main(pairs_of_chromosomes:int):
 
     # Note: This is symmetrical because it's a binomial with an equal rate of success/failure,
     # We could get away with only calculating up to the num_chromosomes//2 trial but this makes the solution less readable
-    prob_exactly_k_shared = [Distributions.binomial_pmf(num_trials= num_chromosomes, num_success=k, prob_succ= p_sib_chrom_is_same) for k in range(num_chromosomes+1)]
+    prob_exactly_k_shared = [Distributions.binomial_pmf(num_trials= num_chromosomes, num_success=k, prob_success= p_sib_chrom_is_same) for k in range(num_chromosomes+1)]
 
     last_prob = round(0.000, 3)
     log_probs = []

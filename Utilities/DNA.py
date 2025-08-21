@@ -2,7 +2,7 @@ from typing import Dict, Set, List, Tuple
 from decimal import Decimal
 from collections import defaultdict, Counter
 from Utilities.Search import KMP
-class StringTools:
+class DNAStringTools:
 
 
 
@@ -14,7 +14,7 @@ class StringTools:
     '''
 
     dna_nuc_complement_trans = str.maketrans({"A": "T", "T": "A", "G": "C", "C":"G"})
-    codon_table_string = '''TTT F      CTT L      ATT I      GTT V
+    _dna_codon_table_string = '''TTT F      CTT L      ATT I      GTT V
 TTC F      CTC L      ATC I      GTC V
 TTA L      CTA L      ATA I      GTA V
 TTG L      CTG L      ATG M      GTG V
@@ -33,7 +33,7 @@ TGG W      CGG R      AGG R      GGG G
 '''
 
 
-    dna_codon_to_amino_acid = dict(zip(*[iter(codon_table_string.split())] * 2)) # Convert our string into a dictionary of dna to codon translations
+    dna_codon_to_amino_acid = dict(zip(*[iter(_dna_codon_table_string.split())] * 2)) # Convert our string into a dictionary of dna to codon translations
     stop_codons = set(["TAA", "TAG", "TGA"])
     start_codons = set(["ATG"]) # "ATG" aka methionine is the most commonly seen start codon although others do exist. For the purposes of this we will assume
 
@@ -43,20 +43,20 @@ TGG W      CGG R      AGG R      GGG G
         return dna_string[::-1]
     @staticmethod
     def complement_dna(dna_string:str):
-        return dna_string.translate(StringTools.dna_nuc_complement_trans)
+        return dna_string.translate(DNAStringTools.dna_nuc_complement_trans)
         pass
 
     @staticmethod
     def reverse_complement_dna(dna_string):
-        return StringTools.reverse_dna(StringTools.complement_dna(dna_string))
+        return DNAStringTools.reverse_dna(DNAStringTools.complement_dna(dna_string))
     
     @staticmethod
     def translate_dna_to_amino_acid(dna_string:str):
         output = ""
         for i in range(0, (len(dna_string)//3)):
             codon = dna_string[3*i: 3*i + 3]
-            if codon not in StringTools.stop_codons:
-                output = output + StringTools.dna_codon_to_amino_acid[codon] 
+            if codon not in DNAStringTools.stop_codons:
+                output = output + DNAStringTools.dna_codon_to_amino_acid[codon] 
             else:
                 break
         return output   
@@ -98,7 +98,7 @@ TGG W      CGG R      AGG R      GGG G
         # If the overlap is past our overlap threshold, we can combine the two strings
         # Else we will return None
 
-        num_overlap_chars = StringTools.find_max_overlaps(string_one, string_two)
+        num_overlap_chars = DNAStringTools.find_max_overlaps(string_one, string_two)
 
         if num_overlap_chars > overlap_threshold:
             output = string_one + string_two[num_overlap_chars:]
@@ -123,6 +123,35 @@ TGG W      CGG R      AGG R      GGG G
         combined_strings = f'{suffix_strings}#{prefix_string}'
         max_overlap = KMP.generate_lps(combined_strings)[-1]  # The last value in the lps array will tell us the maximum overlap between the two strings
         return max_overlap
+    
+    @staticmethod
+    def find_dna_difference_locs(dna_string_one, dna_string_two, is_greedy_search:bool= False):
+        string_one_len = len(dna_string_one)
+        string_two_len = len(dna_string_two)
+        difference_locs = []
+        if string_one_len == string_two_len:
+            for i in range(0, string_one_len):
+                if dna_string_one[i] != dna_string_two[i]:
+                    difference_locs.append(i)
+                    if is_greedy_search:
+                        return difference_locs
+        else:
+            raise IOError(f"String lengths must be equal to use this method. String one has length: {string_one_len}, string two has length: {string_two_len}")
+        return difference_locs
+
+    @staticmethod
+    def count_point_mutations(dna_string_one, dna_string_two):
+        string_one_len = len(dna_string_one)
+        string_two_len = len(dna_string_two)
+        diff = 0
+        if string_one_len == string_two_len:
+            for i in range(0, string_one_len):
+                if dna_string_one[i] != dna_string_two[i]:
+                    diff = diff + 1
+        else:
+            raise IOError(f"String lengths must be equal to use this method. String one has length: {string_one_len}, string two has length: {string_two_len}")
+
+        return diff
 
 
 
@@ -132,7 +161,7 @@ class ProbabilityTools:
     def caclulate_dna_probability(gc_content:float, dna_string:str):
         '''Calculate the probability of the dna string occuring given GC content'''
         
-        nuc_counts = StringTools.count_nucleoutides(dna_string)
+        nuc_counts = DNAStringTools.count_nucleoutides(dna_string)
 
         
 

@@ -79,7 +79,7 @@ def find_max_overlaps(prefix_string, suffix_strings:str) -> int:
     # We can use the lps array to find the maximum overlap between the two strings (as the lps array will tell us how many characters match between the
     # prefix of the second string and the suffix of the first string)
 
-    combined_strings = suffix_strings + "#" + prefix_string
+    combined_strings = f'{suffix_strings}#{prefix_string}'
     max_overlap = KMP.generate_lps(combined_strings)[-1]  # The last value in the lps array will tell us the maximum overlap between the two strings
     return max_overlap
 
