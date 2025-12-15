@@ -8,15 +8,15 @@ import sys
 
 def main(input_strings:List[str]):
     string_trie = Trie(input_strings)
-    string_trie.depth_first_print()
+    print(string_trie.depth_first_string())
 
 input_file_path = sys.argv[1]
 
 input_strings = GenericTextFile.get_generic_file_as_lines(input_file_path)
-input_strings = ["ATAGA",
-"ATC",
-"GAT"
-]
+# input_strings = ["ATAGA",
+# "ATC",
+# "GAT"
+# ]
 main(input_strings)
 
 

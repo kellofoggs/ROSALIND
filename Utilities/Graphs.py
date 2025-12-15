@@ -1,10 +1,12 @@
 from typing import List, Dict, Set, Union, Tuple
 from collections import defaultdict
 import itertools
+import re
+
 '''
 This file is used for the various types of graphs used throughout the Rosalind Project problems
 Has implementations for edge list graphs, adjacency list graphs etc.
-These graphs are helpful in overlap problems and used in Tries
+These graphs are helpful in overlap problems and used in Trie/Tree problems 
 '''
 
 class DebruijnGraph:
@@ -33,7 +35,32 @@ class DebruijnGraph:
                 adjacency_map[k_plus_1_mer[:k]].append( k_plus_1_mer[1:])
             return adjacency_map
 
+class GraphLoader:
 
+    ''' Class used to load graphs from a string format to an object format'''
+    
+    @staticmethod
+    def load_newick_graph_from_string(newick_graph_string: str) ->Union[Dict, List]:
+        '''
+        Returns a graph as either an adjacency map or edge list, as Newick graphs often have unnamed nodes
+        we will use a "DistinctNull" object to differentiate the nodes
+        '''
+        graph_str_len = len(newick_graph_string)
+
+        left_pointer = 0
+        right_pointer = graph_str_len - 1
+        opening_bracket_indices:List[int] = []
+        closing_bracket_indices:List[int] = []
+        bracket_windows:List[Tuple] = []
+
+
+        for char in newick_graph_string:
+            # if len()
+            print(char)
+
+
+
+        pass
 
 class AdjacencyListNode: 
     '''
@@ -117,14 +144,14 @@ class Trie:
         
         # 
 
-    def depth_first_print(self):
+    def depth_first_string(self):
         # start off at the root node
         
         to_visit_stack = [self.root_node] 
         visited = set()
 
 
-
+        edge_list = []
         while len(to_visit_stack) > 0:
             
             current:AdjacencyListNode = to_visit_stack.pop()
@@ -135,9 +162,9 @@ class Trie:
                 for child in current.children:
                     child_node_num = self.node_order_dict[child]
                     edge_label = child.content
-                    print(f"{parent_num} {child_node_num} {edge_label}")
+                    edge_list.append(f"{parent_num} {child_node_num} {edge_label}")
                     to_visit_stack.append(child)
-
+        return "\n".join(edge_list)
 
 
     def add_node(self, path_to_start:str, ):
